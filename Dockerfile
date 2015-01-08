@@ -1,4 +1,5 @@
 FROM ubuntu:14.04.1
+MAINTAINER Henning Jacobs <henning.jacobs@zalando.de>
 
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y curl

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VER=14.04.1-1
+VER=14.04.1-2
 
 docker build -t zalando/ubuntu:$VER .
 

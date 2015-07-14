@@ -2,7 +2,10 @@ FROM ubuntu:14.04.2
 MAINTAINER Henning Jacobs <henning.jacobs@zalando.de>
 
 RUN apt-get update && apt-get upgrade -y
-RUN apt-get install -y curl
+RUN apt-get install -y language-pack-en curl
+
+# set locale
+ENV LANG=en_US.UTF-8
 
 # add Zalando CA
 RUN curl https://static.zalando.de/ca/zalando-service.ca > /usr/local/share/ca-certificates/zalando-service.crt

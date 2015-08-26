@@ -1,5 +1,5 @@
-FROM ubuntu:14.04.2
-MAINTAINER Henning Jacobs <henning.jacobs@zalando.de>
+FROM ubuntu:15.10
+MAINTAINER Zalando SE
 
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y language-pack-en curl

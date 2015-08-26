@@ -2,7 +2,7 @@
 
 VER=$(cat VERSION)
 
-docker build -t zalando/ubuntu:$VER .
+docker build --no-cache=true -t zalando/ubuntu:$VER .
 
 SQUASH_PATH=$(which docker-squash)
 

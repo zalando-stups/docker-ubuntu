@@ -2,10 +2,10 @@
 Ubuntu Base Image
 =================
 
-This Docker base image contains Ubuntu 14.04 LTS and the Zalando CA certificate.
+This Docker base image contains Ubuntu 15.04 and the Zalando CA certificate.
 Versions of this image will be immutable, i.e. there is no "latest" tag, but instead version numbers are incremented like::
 
-    <UBUNTU_LTS_VERSION>-<COUNTER> (example: "14.04.1-1")
+    <UBUNTU_VERSION>-<COUNTER> (example: "15.04-1")
 
 Build the Docker image and squash it with a single command:
 

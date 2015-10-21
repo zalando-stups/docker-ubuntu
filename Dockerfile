@@ -13,7 +13,7 @@ RUN curl https://static.zalando.de/ca/zalando-root.ca > /usr/local/share/ca-cert
 
 # add AWS RDS CA bundle
 RUN mkdir /tmp/rds-ca && \
-    curl http://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem > /tmp/rds-ca/aws-rds-ca-bundle.pem
+    curl https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem > /tmp/rds-ca/aws-rds-ca-bundle.pem
 # split the bundle into individual certs (prefixed with xx)
 # see http://blog.swwomm.com/2015/02/importing-new-rds-ca-certificate-into.html
 RUN cd /tmp/rds-ca && csplit -sz aws-rds-ca-bundle.pem '/-BEGIN CERTIFICATE-/' '{*}'

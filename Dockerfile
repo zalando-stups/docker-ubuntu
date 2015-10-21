@@ -8,8 +8,8 @@ RUN apt-get install -y language-pack-en curl
 ENV LANG=en_US.UTF-8
 
 # add Zalando CA
-RUN curl https://static.zalando.de/ca/zalando-service.ca > /usr/local/share/ca-certificates/zalando-service.crt
-RUN curl https://static.zalando.de/ca/zalando-root.ca > /usr/local/share/ca-certificates/zalando-root.crt
+RUN curl https://secure-static.ztat.net/ca/zalando-service.ca > /usr/local/share/ca-certificates/zalando-service.crt
+RUN curl https://secure-static.ztat.net/ca/zalando-root.ca > /usr/local/share/ca-certificates/zalando-root.crt
 
 # add AWS RDS CA bundle
 RUN mkdir /tmp/rds-ca && \

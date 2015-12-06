@@ -2,7 +2,8 @@ FROM ubuntu:15.10
 MAINTAINER Zalando SE
 
 RUN apt-get update && apt-get upgrade -y
-RUN apt-get install -y language-pack-en curl
+RUN apt-get install --no-install-recommends -y language-pack-en ca-certificates curl
+RUN apt-get purge -y krb5-locales
 
 # set locale
 ENV LANG=en_US.UTF-8
@@ -20,3 +21,7 @@ RUN cd /tmp/rds-ca && csplit -sz aws-rds-ca-bundle.pem '/-BEGIN CERTIFICATE-/' '
 RUN for CERT in /tmp/rds-ca/xx*; do mv $CERT /usr/local/share/ca-certificates/aws-rds-ca-$(basename $CERT).crt; done
 
 RUN update-ca-certificates
+
+# remove documentation
+COPY purge.sh /usr/local/bin/
+RUN purge.sh

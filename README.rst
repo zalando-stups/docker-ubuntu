@@ -7,12 +7,15 @@ Versions of this image will be immutable, i.e. there is no "latest" tag, but ins
 
     <UBUNTU_VERSION>-<COUNTER> (example: "15.04-1")
 
-Build the Docker image and squash it with a single command:
+Build and test the image like that:
 
 .. code-block:: bash
 
-    $ ./build.sh
+    $ docker build -t docker-ubuntu:15.10-local .
+    $ sed 's/UNTESTED/docker-ubuntu:15.10-local/g' Dockerfile.test > Dockerfile.test-gen
+    $ docker build -t docker-ubuntu-test:15.10-local -f Dockerfile.test-gen .
+    $ docker run docker-ubuntu-test:15.10-local
 
-You can find the `latest Ubuntu Docker image on Docker Hub`_.
+You can find the `latest Ubuntu Docker image in our open source registry`_.
 
-.. _latest Ubuntu Docker image on Docker Hub: https://registry.hub.docker.com/u/zalando/ubuntu/
+.. _latest Ubuntu Docker image in our open source registry: https://registry.opensource.zalan.do/teams/stups/artifacts/docker-ubuntu/tags

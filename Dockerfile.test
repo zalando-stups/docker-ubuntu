@@ -1,0 +1,4 @@
+FROM UNTESTED
+MAINTAINER Zalando SE
+
+CMD cat /etc/lsb-release

@@ -1,7 +1,7 @@
 FROM ubuntu:15.10
 MAINTAINER Zalando SE
 
-RUN apt-get update && apt-get upgrade -y
+RUN apt-get update && apt-get dist-upgrade -y
 RUN apt-get install --no-install-recommends -y language-pack-en ca-certificates curl
 RUN apt-get purge -y krb5-locales
 

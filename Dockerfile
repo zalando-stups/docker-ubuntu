@@ -1,9 +1,19 @@
 FROM ubuntu:15.10
 MAINTAINER Zalando SE
 
-RUN apt-get update && apt-get dist-upgrade -y
-RUN apt-get install --no-install-recommends -y language-pack-en ca-certificates curl lsb-release
-RUN apt-get purge -y krb5-locales
+RUN apt-get update \
+    && apt-get dist-upgrade -y \
+    && apt-get install -y --no-install-recommends \
+          language-pack-en \
+          ca-certificates \
+          curl \
+          lsb-release \
+      && apt-get purge -y \
+          krb5-locales \
+      && apt-get clean -y \
+      && apt-get autoremove -y \
+      && rm -rf /tmp/* /var/tmp/* \
+      && rm -rf /var/lib/apt/lists/*
 
 # set locale
 ENV LANG=en_US.UTF-8

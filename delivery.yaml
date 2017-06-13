@@ -19,6 +19,6 @@ build_steps:
         eval "$out"
         # e.g. "Ubuntu 16.04.2 LTS"
         version=$(echo $DISTRIB_DESCRIPTION | awk '{ print $2}')
-        release=registry-write.opensource.zalan.do/stups/ubuntu-untested:$version-${CDP_TARGET_BRANCH_COUNTER}
+        release=registry-write.opensource.zalan.do/stups/ubuntu:$version-${CDP_TARGET_BRANCH_COUNTER}
         docker tag $image $release
         docker push $release

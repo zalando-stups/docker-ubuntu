@@ -1,0 +1,13 @@
+build_steps:
+    - desc: 'Install required build software'
+      cmd: 'apt-get install -y make git apt-transport-https ca-certificates curl'
+    - desc: 'Install Docker'
+      cmd: 'curl -sSL https://get.docker.com/ | sh'
+    - desc: 'Build'
+      cmd: |
+        image=registry-write.opensource.zalan.do/stups/ubuntu-untested:${CDP_BUILD_VERSION}
+        docker build -t $image .
+        sed -i "s,UNTESTED,$image,g" Dockerfile.test
+        docker build -t $image-test -f Dockerfile.test .
+        docker run $image-test
+        docker push $image

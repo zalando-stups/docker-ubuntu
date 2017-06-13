@@ -5,9 +5,16 @@ build_steps:
       cmd: 'curl -sSL https://get.docker.com/ | sh'
     - desc: 'Build'
       cmd: |
-        image=registry-write.opensource.zalan.do/stups/ubuntu-untested:${CDP_BUILD_VERSION}
+        image=ubuntu-temp:${CDP_BUILD_VERSION}
         docker build -t $image .
         sed -i "s,UNTESTED,$image,g" Dockerfile.test
         docker build -t $image-test -f Dockerfile.test .
-        docker run $image-test
-        docker push $image
+        # get current LSB release (/etc/lsb-release)
+        out=$(docker run $image-test)
+        echo $out
+        eval "$out"
+        # e.g. "Ubuntu 16.04.2 LTS"
+        version=$(echo $DISTRIB_DESCRIPTION | awk '{ print $2}')
+        release=registry-write.opensource.zalan.do/stups/ubuntu-untested:$version-${CDP_TARGET_BRANCH_COUNTER}
+        docker tag $image $release
+        docker push $release

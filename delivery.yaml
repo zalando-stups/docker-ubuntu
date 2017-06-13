@@ -3,10 +3,14 @@ build_steps:
       cmd: 'apt-get install -y make git apt-transport-https ca-certificates curl'
     - desc: 'Install Docker'
       cmd: 'curl -sSL https://get.docker.com/ | sh'
+    - desc: 'Install docker-squash'
+      cmd: 'curl -sL https://github.com/jwilder/docker-squash/releases/download/v0.2.0/docker-squash-linux-amd64-v0.2.0.tar.gz | tar -xvz'
     - desc: 'Build'
       cmd: |
         image=ubuntu-temp:${CDP_BUILD_VERSION}
         docker build -t $image .
+        # squash to one layer
+        docker save $image | ./docker-squash -verbose -from root -t $image | docker load
         sed -i "s,UNTESTED,$image,g" Dockerfile.test
         docker build -t $image-test -f Dockerfile.test .
         # get current LSB release (/etc/lsb-release)

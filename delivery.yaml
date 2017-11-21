@@ -1,4 +1,8 @@
-build_steps:
+version: "2017-09-20"
+pipeline:
+  - id: build
+    type: script
+    commands:
     - desc: 'Install required build software'
       cmd: 'apt-get install -y make git apt-transport-https ca-certificates curl'
     - desc: 'Install Docker'
@@ -13,7 +17,7 @@ build_steps:
         out=$(docker run $image-test)
         echo $out
         eval "$out"
-        # e.g. "Ubuntu 16.04.2 LTS"
+        # e.g. "Ubuntu 16.04.3 LTS"
         version=$(echo $DISTRIB_DESCRIPTION | awk '{ print $2}')
         release=registry-write.opensource.zalan.do/stups/ubuntu:$version-${CDP_TARGET_BRANCH_COUNTER}
         IS_PR_BUILD=${CDP_PULL_REQUEST_NUMBER+"true"}
